@@ -21,3 +21,32 @@ server {
         deny all;
     }
 }
+
+server {
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
+
+        ssl_certificate     /var/www/html/ssl.crt;
+        ssl_certificate_key /var/www/html/ssl.key;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        root /var/www/html/public;
+
+        index index.php index.html index.htm;
+
+        server_name webca.com.br;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
