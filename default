@@ -9,11 +9,11 @@ server {
         server_name webca.com.br;
 
         location / {
-                try_files $uri @opencart;
+            try_files $uri $uri/ @opencart;
         }
 
         location @opencart {
-                rewrite ^/(.+)$ /index.php?_route_=$1 last;
+            rewrite ^/(.+)$ /index.php?_route_=$1 last;
         }
 
         location ~* (\.(tpl|ini))$ {
@@ -46,11 +46,11 @@ server {
         server_name webca.com.br;
 
         location / {
-                try_files $uri @opencart;
+            try_files $uri $uri/ @opencart;
         }
 
         location @opencart {
-                rewrite ^/(.+)$ /index.php?_route_=$1 last;
+            rewrite ^/(.+)$ /index.php?_route_=$1 last;
         }
 
         location ~* (\.(tpl|ini))$ {
